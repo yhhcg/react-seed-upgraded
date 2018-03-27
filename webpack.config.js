@@ -9,7 +9,7 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './dist',
+    contentBase: path.resolve(__dirname, 'dist'),
     hot: true,
   },
   output: {
@@ -19,6 +19,12 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /(\.js|\.jsx)$/,
+        include: path.resolve(__dirname, 'src'),
+        loader: 'babel-loader',
+      },
+
       {
         test: /\.css$/,
         use: [
@@ -55,11 +61,16 @@ module.exports = {
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
+      name: true,
       cacheGroups: {
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
         vendors: {
           chunks: 'initial',
           test: path.resolve(__dirname, 'node_modules'),
-          name: 'vendor',
           enforce: true
         }
       }
