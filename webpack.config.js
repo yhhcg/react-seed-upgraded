@@ -10,7 +10,6 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
-    hot: true,
   },
   output: {
     filename: '[name].bundle.[hash].js',
@@ -50,12 +49,12 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'HtmlWebpackPlugin'
+      inject: false,
+      template: require('html-webpack-template'),
+      
+      title: 'HtmlWebpackPlugin',
+      appMountId: 'app',
     }),
-
-    // HMR
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
   ],
 
   optimization: {
