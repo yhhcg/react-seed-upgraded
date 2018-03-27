@@ -10,6 +10,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
+    hot: true
   },
   output: {
     filename: '[name].bundle.[hash].js',
@@ -55,6 +56,9 @@ module.exports = {
       title: 'HtmlWebpackPlugin',
       appMountId: 'app',
     }),
+
+    new webpack.HotModuleReplacementPlugin(), // 热替换插件
+    new webpack.NamedModulesPlugin() // 执行热替换时打印模块名字
   ],
 
   optimization: {

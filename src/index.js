@@ -1,9 +1,9 @@
 import 'babel-polyfill';
-import _ from 'lodash';
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './app';
 
 ReactDOM.render(
-  <h1>webpack 4.0</h1>,
+  <App />,
   document.getElementById('app')
 )
