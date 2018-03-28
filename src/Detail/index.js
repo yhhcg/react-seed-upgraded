@@ -1,7 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import bigPicture from './big-picture.jpg';
+import {hot} from 'react-hot-loader';
 
+@hot(module)
 /**
  * Detail Page
  */
