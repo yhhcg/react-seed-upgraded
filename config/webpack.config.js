@@ -1,28 +1,28 @@
-const path = require('path');
+const path = require('./path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    app: path.appSrc
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.appDist,
     hot: true
   },
   output: {
     filename: '[name].bundle.[hash].js',
     chunkFilename: '[name].chunk.[chunkhash].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.appDist
   },
   module: {
     rules: [
       {
         test: /(\.js|\.jsx)$/,
-        include: path.resolve(__dirname, 'src'),
-        loader: 'babel-loader',
+        include: path.appSrc,
+        loader: 'babel-loader'
       },
 
       {
@@ -48,7 +48,10 @@ module.exports = {
   },
   
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['dist'], {
+      root: path.appPath,
+      verbose: true,
+    }),
     new HtmlWebpackPlugin({
       inject: false,
       template: require('html-webpack-template'),
@@ -73,7 +76,7 @@ module.exports = {
         },
         vendors: {
           chunks: 'initial',
-          test: path.resolve(__dirname, 'node_modules'),
+          test: path.appDependencies,
           enforce: true
         }
       }

@@ -4,9 +4,9 @@
   "description": "webpack 4.0",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "start": "webpack-dev-server --config ./config/webpack.config.js --open --mode development",
+    "dev": "webpack --config ./config/webpack.config.js --mode development",
+    "build": "webpack --config ./config/webpack.config.js --mode production"
   },
   "author": "yhhcg",
   "license": "MIT",
