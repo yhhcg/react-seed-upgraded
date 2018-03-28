@@ -1,6 +1,4 @@
-import React from 'react';
 import {hot} from 'react-hot-loader';
+import Router from './router';
 
-const App = () => <div>Webpack 4.x</div>;
-
-export default hot(module)(App)
+export default hot(module)(Router);
