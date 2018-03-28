@@ -1,4 +1,14 @@
+import React from 'react';
+import {CssBaseline} from 'material-ui';
 import {hot} from 'react-hot-loader';
+
 import Router from './router';
 
-export default hot(module)(Router);
+const App = () => (
+  <div>
+    <CssBaseline />
+    <Router />
+  </div>
+);
+
+export default hot(module)(App);
