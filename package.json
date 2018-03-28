@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.dev.js --open",
     "build:test": "webpack --config ./config/webpack.dev.js",
+    "build:analyse": "webpack --config ./config/webpack.analyse.js",
     "build:prod": "webpack --config ./config/webpack.prod.js",
     "doc": "jsdoc src -r"
   },
@@ -37,6 +38,7 @@
     "jsdoc": "^3.5.5",
     "url-loader": "^1.0.1",
     "webpack": "^4.2.0",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.1",
     "webpack-merge": "^4.1.2"
