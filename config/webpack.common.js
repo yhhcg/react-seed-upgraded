@@ -9,8 +9,8 @@ module.exports = {
   },
 
   output: {
-    filename: '[name].[hash].js',
-    chunkFilename: '[name].[chunkhash].js',
+    filename: 'js/[name].[hash].js',
+    chunkFilename: 'js/[name].[chunkhash].js',
     path: path.appDist
   },
 
@@ -28,7 +28,8 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 8192
+              limit: 8192,
+              name: 'images/[name].[hash].[ext]'
             }
           }
         ]
@@ -40,7 +41,8 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 8192
+              limit: 8192,
+              name: 'fonts/[name].[hash].[ext]'
             }
           }
         ]
