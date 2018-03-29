@@ -1,4 +1,6 @@
-# react-seed-simplify
+# react-seed-upgraded
+
+We will be import redux base on react-seed-simplify
 
 Features:
 
