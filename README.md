@@ -1,6 +1,6 @@
 # react-seed-upgraded
 
-We will be import redux base on react-seed-simplify
+We import redux base on our [react-seed-simplify][1]
 
 Features:
 
@@ -9,3 +9,5 @@ Features:
 - Tree-shaking
 - Code inspection
 - Code Splitting
+
+ [1]: https://github.com/yhhcg/react-seed-simplify
