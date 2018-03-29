@@ -63,24 +63,19 @@ module.exports = {
       title: 'HtmlWebpackPlugin',
       appMountId: 'app'
     })
-  ]
+  ],
 
-  // optimization: {
-  //   runtimeChunk: 'single',
-  //   splitChunks: {
-  //     name: true,
-  //     cacheGroups: {
-  //       default: {
-  //         minChunks: 2,
-  //         priority: -20,
-  //         reuseExistingChunk: true,
-  //       },
-  //       vendors: {
-  //         chunks: 'initial',
-  //         test: path.appDependencies,
-  //         enforce: true
-  //       }
-  //     }
-  //   }
-  // }
+  optimization: {
+    runtimeChunk: true,
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          name: 'vendors',
+          test: /[\\/]node_modules[\\/]/,
+          priority: -20
+        }
+      }
+    }
+  }
 };

@@ -17,12 +17,5 @@ module.exports = merge(common, {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin() // 热替换插件
-  ],
-
-  optimization: {
-    runtimeChunk: true,
-    splitChunks: {
-      chunks: 'all'
-    }
-  }
+  ]
 });
