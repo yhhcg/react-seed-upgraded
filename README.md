@@ -2,14 +2,14 @@
 
 Import redux base on [react-seed-simplify](https://github.com/yhhcg/react-seed-simplify)
 
-##Developing
+## Developing
 
 ``` bash
 $ yarn
 $ yarn start
 ```
 
-Features:
+## Features:
 
 - Lazy Loading
 - HMR
