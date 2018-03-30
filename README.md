@@ -1,6 +1,13 @@
 # react-seed-upgraded
 
-We import redux base on our [react-seed-simplify][1]
+Import redux base on [react-seed-simplify](https://github.com/yhhcg/react-seed-simplify)
+
+##Developing
+
+``` bash
+$ yarn
+$ yarn start
+```
 
 Features:
 
@@ -9,5 +16,3 @@ Features:
 - Tree-shaking
 - Code inspection
 - Code Splitting
-
- [1]: https://github.com/yhhcg/react-seed-simplify
