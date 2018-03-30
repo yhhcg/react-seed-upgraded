@@ -1,6 +1,5 @@
 /**
  * This module composes root reducer including react-router
- * @module App/Reducer
  * @requires redux
  * @requires react-router-redux
  */

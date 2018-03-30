@@ -1,15 +1,12 @@
-/**
- * Saga entrance file
- * @requires redux-saga
- * @requires redux-form-saga
- * @requires {@link module:Speed/Saga}
- */
 import {all} from 'redux-saga/effects';
 
+import list from './List/saga';
+
 /**
- * [*rootSaga description]
- * @yield {[type]} [description]
+ * Root saga
  */
 export default function* rootSaga() {
-  yield all([]);
+  yield all([
+    list(),
+  ]);
 }
