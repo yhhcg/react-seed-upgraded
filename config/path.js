@@ -10,6 +10,5 @@ const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 module.exports = {
   appPath: resolveApp('.'),
   appDist: resolveApp('dist'),
-  appSrc: resolveApp('src'),
-  appDependencies: resolveApp('node_modules')
+  appSrc: resolveApp('src')
 };
