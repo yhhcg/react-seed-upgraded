@@ -55,12 +55,10 @@ export default class Router extends React.Component {
    */
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={this.ListPage} />
-          <Route exact path="/detail" component={this.DetailPage} />
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={this.ListPage} />
+        <Route exact path="/detail" component={this.DetailPage} />
+      </Switch>
     );
   }
 }
