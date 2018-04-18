@@ -1,17 +1,16 @@
 const path = require('./path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    app: path.appSrc
+    app: path.appSrc,
   },
 
   output: {
     filename: 'js/[name].[hash].js',
     chunkFilename: 'js/[name].[chunkhash].js',
-    path: path.appDist
+    path: path.appDist,
   },
 
   module: {
@@ -19,7 +18,7 @@ module.exports = {
       {
         test: /(\.js|\.jsx)$/,
         include: path.appSrc,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
 
       {
@@ -29,10 +28,10 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'images/[name].[hash].[ext]'
-            }
-          }
-        ]
+              name: 'images/[name].[hash].[ext]',
+            },
+          },
+        ],
       },
 
       {
@@ -42,27 +41,27 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'fonts/[name].[hash].[ext]'
-            }
-          }
-        ]
-      }
-    ]
+              name: 'fonts/[name].[hash].[ext]',
+            },
+          },
+        ],
+      },
+    ],
   },
-  
+
   plugins: [
     new CleanWebpackPlugin(['dist'], {
       root: path.appPath,
-      verbose: true
+      verbose: true,
     }),
 
     new HtmlWebpackPlugin({
       inject: false,
       template: require('html-webpack-template'),
-      
+
       title: 'HtmlWebpackPlugin',
-      appMountId: 'app'
-    })
+      appMountId: 'app',
+    }),
   ],
 
   optimization: {
@@ -73,9 +72,9 @@ module.exports = {
         vendors: {
           name: 'vendors',
           test: /[\\/]node_modules[\\/]/,
-          priority: -20
-        }
-      }
-    }
-  }
+          priority: -20,
+        },
+      },
+    },
+  },
 };

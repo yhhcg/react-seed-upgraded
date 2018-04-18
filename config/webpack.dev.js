@@ -12,10 +12,10 @@ module.exports = merge(common, {
   devServer: {
     contentBase: path.appDist,
     historyApiFallback: true,
-    hot: true
+    hot: true,
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin() // 热替换插件
-  ]
+    new webpack.HotModuleReplacementPlugin(), // 热替换插件
+  ],
 });
