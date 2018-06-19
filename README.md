@@ -13,6 +13,6 @@ $ yarn start
 
 - Lazy Loading
 - HMR
-- Tree-shaking
-- Code inspection
+- Tree Shaking
+- Code Inspection
 - Code Splitting
