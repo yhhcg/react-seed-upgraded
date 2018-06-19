@@ -1,6 +1,4 @@
-/**
- * This module exports saga
- */
+/* eslint-disable require-jsdoc */
 import {put, takeEvery} from 'redux-saga/effects';
 
 import {
@@ -13,10 +11,6 @@ const {
   fetchSomeAsyncRequestFailure,
 } = async;
 
-/**
- * @param  {object} options
- * @yield {Action}
- */
 export function* mockFetch() {
   try {
     yield new Promise((resolve) => {
@@ -33,9 +27,6 @@ export function* mockFetch() {
   }
 }
 
-/**
- * Watch api request
- */
 export default function* () {
   yield takeEvery(FETCH_SOME_ASYNC_REQUEST, mockFetch);
 }

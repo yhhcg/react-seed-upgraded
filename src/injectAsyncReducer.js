@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import createReducer from './reducer';
 
 /**

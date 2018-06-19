@@ -14,12 +14,12 @@ const styles = (theme) => ({
   },
 });
 
-@hot(module)
-@withStyles(styles)
 /**
  * List Page
  */
-export default class List extends React.Component {
+@hot(module)
+@withStyles(styles)
+class List extends React.Component {
   static propTypes = {
     classes: object,
     count: number,
@@ -35,7 +35,7 @@ export default class List extends React.Component {
 
   /**
    * Render List Page
-   * @return {Component}
+   * @return {Node}
    */
   render() {
     const {
@@ -57,3 +57,5 @@ export default class List extends React.Component {
     );
   }
 }
+
+export default List;

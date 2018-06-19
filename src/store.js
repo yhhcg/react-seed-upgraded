@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 /**
  * This module composes redux store instance.
  * Redux store manages many complex states for the app

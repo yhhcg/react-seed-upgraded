@@ -1,16 +1,17 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import bigPicture from './big-picture.jpg';
 import {hot} from 'react-hot-loader';
 
-@hot(module)
+import bigPicture from './big-picture.jpg';
+
 /**
  * Detail Page
  */
-export default class Detail extends React.Component {
+@hot(module)
+class Detail extends React.Component {
   /**
    * Render Detail Page
-   * @return {Component}
+   * @return {Node}
    */
   render() {
     return (
@@ -27,3 +28,5 @@ export default class Detail extends React.Component {
     );
   }
 }
+
+export default Detail;

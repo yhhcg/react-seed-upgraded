@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import {connect} from 'react-redux';
 
 import Component from './component';
@@ -24,9 +25,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
-/**
- * Connected react component
- */
-export default class Container extends Component {
+class Container extends Component {
 
 }
+
+export default Container;

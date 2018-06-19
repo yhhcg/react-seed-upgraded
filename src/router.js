@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import React from 'react';
 import {
   Route,
@@ -12,15 +13,11 @@ import injectAsyncReducer from './injectAsyncReducer';
 /**
  * Router with lazy loaded pages
  */
-export default class Router extends React.Component {
+class Router extends React.Component {
   static contextTypes = {
     store: object,
   };
 
-  /**
-   * @param {Object} props
-   * @param {Object} context
-   */
   constructor(props, context) {
     super(props);
 
@@ -49,9 +46,6 @@ export default class Router extends React.Component {
     });
   }
 
-  /**
-   * @return {Component}
-   */
   render() {
     return (
       <Switch>
@@ -61,3 +55,5 @@ export default class Router extends React.Component {
     );
   }
 }
+
+export default Router;

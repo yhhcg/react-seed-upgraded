@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 /**
  * This module composes root reducer including react-router
  * @requires redux
