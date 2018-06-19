@@ -7,9 +7,13 @@
   "plugins": [
     "react-hot-loader/babel",
     "transform-decorators-legacy",
-    ["direct-import", [
-      "@material-ui/core",
-      "react-router-dom"
-    ]]
+    [
+      "import", [{
+        "camel2DashComponentName": false,
+        "libraryName": "@material-ui/core",
+        "libraryDirectory": "",
+        "style": false
+      }]
+    ]
   ]
 }
