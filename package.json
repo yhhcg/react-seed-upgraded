@@ -16,8 +16,6 @@
   "dependencies": {
     "@material-ui/core": "^1.2.2",
     "babel-polyfill": "^6.26.0",
-    "history": "^4.7.2",
-    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
