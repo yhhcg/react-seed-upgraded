@@ -2,10 +2,14 @@
  * This module receives redux actions and responses with action handlers
  */
 import {
+  async,
+} from './actions';
+
+const {
   FETCH_SOME_ASYNC_REQUEST,
-  FETCH_SOME_ASYNC_SUCCEED,
-  FETCH_SOME_ASYNC_FAILURE,
-} from './actionTypes';
+  FETCH_SOME_ASYNC_REQUEST_SUCCEED,
+  FETCH_SOME_ASYNC_REQUEST_FAILURE,
+} = async;
 
 /**
  * Initial state value of react store
@@ -29,13 +33,13 @@ export default function Reducer(state=initialState, action) {
         ...state,
         isLoading: true,
       };
-    case FETCH_SOME_ASYNC_SUCCEED:
+    case FETCH_SOME_ASYNC_REQUEST_SUCCEED:
       return {
         ...state,
         isLoading: false,
         count: state.count + 1,
       };
-    case FETCH_SOME_ASYNC_FAILURE:
+    case FETCH_SOME_ASYNC_REQUEST_FAILURE:
       return {
         ...state,
         isLoading: false,

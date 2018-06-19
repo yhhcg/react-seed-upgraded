@@ -4,13 +4,14 @@
 import {put, takeEvery} from 'redux-saga/effects';
 
 import {
-  FETCH_SOME_ASYNC_REQUEST,
-} from './actionTypes';
-
-import {
-  fetchSomeAsyncSucceed,
-  fetchSomeAsyncFailure,
+  async,
 } from './actions';
+
+const {
+  FETCH_SOME_ASYNC_REQUEST,
+  fetchSomeAsyncRequestSucceed,
+  fetchSomeAsyncRequestFailure,
+} = async;
 
 /**
  * @param  {object} options
@@ -25,10 +26,10 @@ export function* mockFetch() {
     });
 
     // Fire success action
-    yield put(fetchSomeAsyncSucceed());
+    yield put(fetchSomeAsyncRequestSucceed());
   } catch (err) {
     // Fire failure action
-    yield put(fetchSomeAsyncFailure(err));
+    yield put(fetchSomeAsyncRequestFailure(err));
   }
 }
 

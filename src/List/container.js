@@ -2,8 +2,12 @@ import {connect} from 'react-redux';
 
 import Component from './component';
 import {
-  fetchSomeAsyncRequest,
+  async,
 } from './actions';
+
+const {
+  fetchSomeAsyncRequest,
+} = async;
 
 const mapStateToProps = (state, ownProps) => {
   return {

@@ -1,26 +1,8 @@
-import {
-  FETCH_SOME_ASYNC_REQUEST,
-  FETCH_SOME_ASYNC_SUCCEED,
-  FETCH_SOME_ASYNC_FAILURE,
-} from './actionTypes';
+import {Async} from 'redux-action-boilerplate';
 
-export const fetchSomeAsyncRequest = () => (
-  {
-    type: FETCH_SOME_ASYNC_REQUEST,
-  }
-);
-
-export const fetchSomeAsyncSucceed = () => (
-  {
-    type: FETCH_SOME_ASYNC_SUCCEED,
-    // payload: {
-    //   response,
-    // },
-  }
-);
-
-export const fetchSomeAsyncFailure = () => (
-  {
-    type: FETCH_SOME_ASYNC_FAILURE,
-  }
-);
+export const async = new Async({
+  prefix: 'list',
+  actions: [
+    'fetchSomeAsyncRequest',
+  ],
+});
