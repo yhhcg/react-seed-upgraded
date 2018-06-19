@@ -8,7 +8,7 @@
     "react-hot-loader/babel",
     "transform-decorators-legacy",
     ["direct-import", [
-      "material-ui",
+      "@material-ui/core",
       "react-router-dom"
     ]]
   ]
