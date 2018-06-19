@@ -4,11 +4,12 @@
   "description": "webpack 4.0",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config ./config/webpack.dev.js --open",
-    "build:test": "webpack --config ./config/webpack.dev.js",
     "build:analyse": "webpack --config ./config/webpack.analyse.js",
+    "build:dev": "webpack --config ./config/webpack.dev.js",
+    "build:test": "webpack --config ./config/webpack.test.js",
     "build:prod": "webpack --config ./config/webpack.prod.js",
-    "doc": "jsdoc src -r"
+    "doc": "jsdoc src -r",
+    "start": "webpack-dev-server --config ./config/webpack.local.js --open"
   },
   "author": "yhhcg",
   "license": "MIT",
