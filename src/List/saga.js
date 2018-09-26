@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
-import {put, takeEvery} from 'redux-saga/effects';
-
+import { put, takeEvery } from 'redux-saga/effects';
 import {
   async,
 } from './actions';

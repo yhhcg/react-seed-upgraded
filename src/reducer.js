@@ -4,8 +4,8 @@
  * @requires redux
  * @requires react-router-redux
  */
-import {combineReducers} from 'redux';
-import {routerReducer as router} from 'react-router-redux';
+import { combineReducers } from 'redux';
+import { routerReducer as router } from 'react-router-redux';
 
 /**
  * App reducer maintain states to be shared across modules
@@ -14,7 +14,7 @@ import {routerReducer as router} from 'react-router-redux';
  * @param  {Object} action - Redux action
  * @return {Object}
  */
-const app = (state={city: 330100}, action) => {
+const app = (state = { city: 330100 }, action) => {
   return state;
 };
 

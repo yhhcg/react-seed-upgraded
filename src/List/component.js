@@ -4,9 +4,9 @@ import {
   number,
   func,
 } from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
-import {Link} from 'react-router-dom';
-import {hot} from 'react-hot-loader';
+import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import { hot } from 'react-hot-loader';
 
 const styles = (theme) => ({
   root: {

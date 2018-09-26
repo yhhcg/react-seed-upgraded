@@ -4,9 +4,8 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import {object} from 'prop-types';
+import { object } from 'prop-types';
 import lodable from 'react-loadable';
-
 // Dynamically load reducer
 import injectAsyncReducer from './injectAsyncReducer';
 
@@ -26,7 +25,7 @@ class Router extends React.Component {
         injectAsyncReducer( // Aynchronously load reducer
           context.store,
           'list', // Reducer name
-          require('./List/reducer').default // Reducer function
+          require('./List/reducer').default, // Reducer function
         );
 
         return import('./List/container');

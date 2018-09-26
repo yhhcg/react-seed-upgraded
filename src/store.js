@@ -3,8 +3,7 @@
  * This module composes redux store instance.
  * Redux store manages many complex states for the app
  */
-import {createStore} from 'redux';
-
+import { createStore } from 'redux';
 import createReducer from './reducer';
 
 /**

@@ -2,14 +2,12 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import {applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
-import {ConnectedRouter, routerMiddleware} from 'react-router-redux';
-import {createBrowserHistory as createHistory} from 'history';
+import { applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
+import { createBrowserHistory as createHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
-
 import configureStore from './store';
 import App from './app';
 import rootSaga from './saga';
@@ -50,5 +48,5 @@ ReactDOM.render(
       <App />
     </ConnectedRouter>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('app'),
 );
