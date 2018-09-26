@@ -1,16 +1,13 @@
-/* eslint-disable require-jsdoc */
 /**
  * This module composes redux store instance.
- * Redux store manages many complex states for the app
+ * Redux store manages many complex states for the app.
  */
-import {createStore} from 'redux';
-
+import { createStore } from 'redux';
 import createReducer from './reducer';
 
 /**
- * Factory composing react store with reducers and middlewares
- * @param  {Object} initialState - Instance by calling applyMiddleware
- * @return {Store}
+ * Factory composing react store with reducers and middlewares.
+ * @param  {Object} initialState - An instance by calling applyMiddleware.
  */
 export default function configureStore(initialState) {
   const store = createStore(createReducer(), initialState);
@@ -22,8 +19,10 @@ export default function configureStore(initialState) {
   //   });
   // }
 
-  // Extensions
-  // Async reducer registry, adding an extra attribute to the store object
+  /**
+   * Extensions.
+   * Async reducer registry, adding an extra attribute to the store object.
+   */
   store.asyncReducers = {};
 
   return store;

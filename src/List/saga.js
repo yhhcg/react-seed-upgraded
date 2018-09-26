@@ -1,14 +1,10 @@
-/* eslint-disable require-jsdoc */
-import {put, takeEvery} from 'redux-saga/effects';
-
+import { put, takeEvery } from 'redux-saga/effects';
 import {
   async,
 } from './actions';
 
 const {
-  FETCH_SOME_ASYNC_REQUEST,
-  fetchSomeAsyncRequestSucceed,
-  fetchSomeAsyncRequestFailure,
+  fetchSomeAsyncRequest,
 } = async;
 
 export function* mockFetch() {
@@ -19,14 +15,14 @@ export function* mockFetch() {
       }, 1000);
     });
 
-    // Fire success action
-    yield put(fetchSomeAsyncRequestSucceed());
+    /* Fire success action. */
+    yield put(fetchSomeAsyncRequest.success());
   } catch (err) {
-    // Fire failure action
-    yield put(fetchSomeAsyncRequestFailure(err));
+    /* Fire failure action. */
+    yield put(fetchSomeAsyncRequest.failure(err));
   }
 }
 
 export default function* () {
-  yield takeEvery(FETCH_SOME_ASYNC_REQUEST, mockFetch);
+  yield takeEvery(fetchSomeAsyncRequest.TYPE, mockFetch);
 }

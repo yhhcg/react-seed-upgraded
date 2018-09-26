@@ -1,6 +1,4 @@
-/* eslint-disable require-jsdoc */
-import {connect} from 'react-redux';
-
+import { connect } from 'react-redux';
 import Component from './component';
 import {
   async,
@@ -10,13 +8,13 @@ const {
   fetchSomeAsyncRequest,
 } = async;
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     count: state.list.count,
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     fetchSomeAsyncRequest: () => {
       dispatch(fetchSomeAsyncRequest());

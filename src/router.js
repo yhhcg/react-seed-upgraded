@@ -1,18 +1,14 @@
-/* eslint-disable require-jsdoc */
 import React from 'react';
 import {
   Route,
   Switch,
 } from 'react-router-dom';
-import {object} from 'prop-types';
+import { object } from 'prop-types';
 import lodable from 'react-loadable';
-
-// Dynamically load reducer
+/* Dynamically load reducer. */
 import injectAsyncReducer from './injectAsyncReducer';
 
-/**
- * Router with lazy loaded pages
- */
+/* Router with lazy loaded pages. */
 class Router extends React.Component {
   static contextTypes = {
     store: object,
@@ -23,10 +19,13 @@ class Router extends React.Component {
 
     this.ListPage = lodable({
       loader: () => {
-        injectAsyncReducer( // Aynchronously load reducer
+        /* Aynchronously load reducer. */
+        injectAsyncReducer(
           context.store,
-          'list', // Reducer name
-          require('./List/reducer').default // Reducer function
+          /* Reducer name. */
+          'list',
+          /* Reducer function. */
+          require('./List/reducer').default, // eslint-disable-line global-require
         );
 
         return import('./List/container');

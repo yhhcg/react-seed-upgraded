@@ -4,19 +4,17 @@ import {
   number,
   func,
 } from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
-import {Link} from 'react-router-dom';
-import {hot} from 'react-hot-loader';
+import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import { hot } from 'react-hot-loader';
 
-const styles = (theme) => ({
+const styles = () => ({
   root: {
     color: 'orange',
   },
 });
 
-/**
- * List Page
- */
+/* List Page. */
 @hot(module)
 @withStyles(styles)
 class List extends React.Component {
@@ -26,17 +24,12 @@ class List extends React.Component {
     fetchSomeAsyncRequest: func,
   };
 
-  /**
-   * Call saga function to increment count by 1
-   */
-  onClick() {
+  /* Call saga function to increment count by 1. */
+  handleClick = () => {
     this.props.fetchSomeAsyncRequest();
   }
 
-  /**
-   * Render List Page
-   * @return {Node}
-   */
+  /* Render List Page. */
   render() {
     const {
       classes,
@@ -49,10 +42,10 @@ class List extends React.Component {
         <ul>
           <li><Link to="/detail">Redirect and lazy load detail page</Link></li>
         </ul>
-        <div onClick={this.onClick.bind(this)}>
+        <button onClick={this.handleClick} type="button">
           Click me, to mock async callback:
           {count}
-        </div>
+        </button>
       </div>
     );
   }
