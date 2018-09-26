@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = {
   // So parent files don't get applied
   root: true,
@@ -17,7 +15,7 @@ module.exports = {
     ecmaVersion: 7,
     sourceType: 'module',
   },
-  plugins: ['babel', 'import', 'jsx-a11y',],
+  plugins: ['babel', 'import', 'jsx-a11y', 'material-ui'],
   rules: {
     'linebreak-style': 'off', // Don't play nicely with Windows
     'arrow-body-style': 'off', // Incompatible with prettier
@@ -78,6 +76,8 @@ module.exports = {
     'react/no-direct-mutation-state': 'error', // airbnb is using off
     'react/no-find-dom-node': 'off', // airbnb use error
     'react/sort-prop-types': 'error', // airbnb use off
+
+    'material-ui/docgen-ignore-before-comment': 'error',
 
     'jsx-a11y/label-has-associated-control': 'off',
     'jsx-a11y/label-has-for': 'off',
