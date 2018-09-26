@@ -5,9 +5,7 @@ import {
 } from './actions';
 
 const {
-  FETCH_SOME_ASYNC_REQUEST,
-  fetchSomeAsyncRequestSucceed,
-  fetchSomeAsyncRequestFailure,
+  fetchSomeAsyncRequest,
 } = async;
 
 export function* mockFetch() {
@@ -19,13 +17,13 @@ export function* mockFetch() {
     });
 
     // Fire success action
-    yield put(fetchSomeAsyncRequestSucceed());
+    yield put(fetchSomeAsyncRequest.success());
   } catch (err) {
     // Fire failure action
-    yield put(fetchSomeAsyncRequestFailure(err));
+    yield put(fetchSomeAsyncRequest.failure(err));
   }
 }
 
 export default function* () {
-  yield takeEvery(FETCH_SOME_ASYNC_REQUEST, mockFetch);
+  yield takeEvery(fetchSomeAsyncRequest.TYPE, mockFetch);
 }
