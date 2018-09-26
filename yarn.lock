@@ -2257,10 +2257,6 @@ eslint-plugin-jsx-a11y@^6.1.1:
     has "^1.0.3"
     jsx-ast-utils "^2.0.1"
 
-eslint-plugin-material-ui@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-material-ui/-/eslint-plugin-material-ui-1.0.1.tgz#ef844d41dc756fe1a689e681e12935d8eee48010"
-
 eslint-plugin-react@^7.11.0:
   version "7.11.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.11.1.tgz#c01a7af6f17519457d6116aa94fc6d2ccad5443c"
