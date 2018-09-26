@@ -1,4 +1,3 @@
-/* eslint-disable require-jsdoc */
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -12,31 +11,27 @@ import configureStore from './store';
 import App from './app';
 import rootSaga from './saga';
 
-/**
- * Contains HTML5 browser history instance
- */
+/* Contains HTML5 browser history instance. */
 const history = createHistory();
 
-/**
- * Represents history middleware to be injected into redux
- */
+/* Represents history middleware to be injected into redux. */
 const historyMiddleware = routerMiddleware(history);
 
-/**
- * Represents saga middleware
- */
+/* Represents saga middleware. */
 const sagaMiddleware = createSagaMiddleware();
 
-// Create middlewares
-// Disable logger middlewares in production mode
+/**
+ * Create middlewares.
+ * Disable logger middlewares in production mode.
+ */
 let middlewares = [historyMiddleware, sagaMiddleware];
 if (process.env.NODE_ENV !== 'production') {
   middlewares = [...middlewares, logger];
 }
 /**
- * Represents the integration of redux store and react router
+ * Represents the integration of redux store and react router.
  * Logger must be the last middleware in chain,
- * otherwise it will log thunk and promise, not actual actions
+ * otherwise it will log thunk and promise, not actual actions.
  */
 const store = configureStore(applyMiddleware(...middlewares));
 

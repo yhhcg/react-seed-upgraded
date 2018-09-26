@@ -1,4 +1,3 @@
-/* eslint-disable require-jsdoc */
 import { put, takeEvery } from 'redux-saga/effects';
 import {
   async,
@@ -16,10 +15,10 @@ export function* mockFetch() {
       }, 1000);
     });
 
-    // Fire success action
+    /* Fire success action. */
     yield put(fetchSomeAsyncRequest.success());
   } catch (err) {
-    // Fire failure action
+    /* Fire failure action. */
     yield put(fetchSomeAsyncRequest.failure(err));
   }
 }

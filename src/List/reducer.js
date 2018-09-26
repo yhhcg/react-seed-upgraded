@@ -1,4 +1,3 @@
-/* eslint-disable require-jsdoc */
 import {
   async,
 } from './actions';
@@ -12,7 +11,7 @@ const initialState = {
   count: 1,
 };
 
-export default function Reducer(state=initialState, action) {
+export default function Reducer(state = initialState, action) {
   switch (action.type) {
     case fetchSomeAsyncRequest.TYPE:
       return {
