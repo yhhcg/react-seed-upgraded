@@ -83,4 +83,10 @@ module.exports = {
 
     'no-void': 'off',
   },
+  settings : {
+    'react': {
+      'pragma': "React",
+      'version': "16.4"
+    },
+  },
 };
