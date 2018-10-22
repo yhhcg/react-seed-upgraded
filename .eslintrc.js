@@ -84,6 +84,11 @@ module.exports = {
     'no-void': 'off',
   },
   settings : {
+    'import/resolver': {
+      'webpack': {
+        'config': './config/webpack.common.js'
+      }
+    },
     'react': {
       'pragma': "React",
       'version': "16.4"
