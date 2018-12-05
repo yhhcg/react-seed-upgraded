@@ -6,12 +6,6 @@
   "plugins": [
     "react-hot-loader/babel",
     [
-      "@babel/plugin-proposal-decorators",
-      {
-        "legacy": true
-      }
-    ],
-    [
       "import",
       {
         "camel2DashComponentName": false,
@@ -28,12 +22,6 @@
     "@babel/plugin-proposal-export-namespace-from",
     "@babel/plugin-proposal-numeric-separator",
     "@babel/plugin-proposal-throw-expressions",
-    [
-      "@babel/plugin-proposal-decorators",
-      {
-        "legacy": true
-      }
-    ],
     "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-logical-assignment-operators",
     "@babel/plugin-proposal-optional-chaining",
@@ -41,6 +29,12 @@
       "@babel/plugin-proposal-pipeline-operator",
       {
         "proposal": "minimal"
+      }
+    ],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
       }
     ],
     "@babel/plugin-proposal-nullish-coalescing-operator",
