@@ -13,14 +13,12 @@
     ],
     [
       "import",
-      [
-        {
-          "camel2DashComponentName": false,
-          "libraryName": "@material-ui/core",
-          "libraryDirectory": "",
-          "style": false
-        }
-      ]
+      {
+        "camel2DashComponentName": false,
+        "libraryName": "@material-ui/core",
+        "libraryDirectory": "",
+        "style": false
+      }
     ],
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-syntax-import-meta",
