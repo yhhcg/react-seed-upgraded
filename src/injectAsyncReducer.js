@@ -1,4 +1,5 @@
 import createReducer from './reducer';
+import { history } from './index';
 
 /**
  * asynchronously inject reducer.
@@ -18,5 +19,5 @@ export default function injectAsyncReducer(store, name, asyncReducer) {
    * which replaces the current reducer used by the store to calculate the state.
    * https://github.com/reactjs/redux/blob/master/docs/api/Store.md#replaceReducer
    */
-  store.replaceReducer(createReducer(store.asyncReducers));
+  store.replaceReducer(createReducer(history, store.asyncReducers));
 }
