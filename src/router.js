@@ -28,7 +28,15 @@ class Router extends React.Component {
           /* Reducer function. */
           require('./List/reducer').default, // eslint-disable-line global-require
         );
-        /* Asynchronously load saga. */
+        /**
+         * Asynchronously load saga.
+         *
+         * If you take a action on multiple pages, dispatch the action on one of the pages,
+         * the saga of other pages will be triggered.
+         * In order to avoid the situation, the sagasInjector expose the sagaManager and you
+         * can use it to inject saga and cancel saga. Refer to List/container how to do it.
+         * If you control saga yourself, you can remove the following load.
+         */
         sagaManager.startSaga(
           /* Saga name. */
           'list',
