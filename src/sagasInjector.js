@@ -4,53 +4,53 @@ import { take, fork, cancel } from 'redux-saga/effects';
 const CANCEL_SAGAS_ACTION = Symbol('CANCEL_SAGAS_HMR');
 let sagaMiddleware;
 
-/** Save created store
- * We will use it to dispatch a cancel action
- */
+/* We will use it to dispatch a cancel action */
 let store;
 
 /**
- * Listens cancel action.
- * If payload matches key,
- * cancel the previous listener.
- * */
-function createAbortableSaga(key, saga) {
+ * Return a generator to be run in saga.
+ * In this generator, we start to run saga asynchronously.
+ * Then listen to cancel action.
+ * Corresponding Cancel action is emitted by sagaManager.cancelSaga.
+ * @param {string} sagaName
+ * @param {function} saga
+ */
+function createAbortableSaga(sagaName, saga) {
   return function* main() {
-    /* Start to run saga asynchronously, and return a task,
-     * only task is cancellable.
-     */
+    /* Only obtained task is cancellable */
     const sagaTask = yield fork(saga);
     const { payload } = yield take(CANCEL_SAGAS_ACTION);
-    if (payload === key) {
+    if (payload === sagaName) {
       yield cancel(sagaTask);
     }
   };
 }
 
-const SagaManager = {
-  /**
-   * Add listener to sagaMiddleware,
-   * it listens cancel action.
-   * */
-  startSaga(key, saga) {
-    sagaMiddleware.run(createAbortableSaga(key, saga));
+/**
+ * Export to run and cancel saga.
+ * @type {{startSaga(*=, *=): void, cancelSaga(*=): void}}
+ */
+const sagaManager = {
+  startSaga(sagaName, saga) {
+    sagaMiddleware.run(createAbortableSaga(sagaName, saga));
   },
 
-  cancelSaga(key) {
+  cancelSaga(sagaName) {
     store.dispatch({
       type: CANCEL_SAGAS_ACTION,
-      payload: key,
+      payload: sagaName,
     });
   },
 };
 
 /**
  * Create Store with reducer and saga enhancers,
- * which keeps sagas injected, could  be cancel later.
- * */
+ * which keeps sagas injected, could  be cancelled later,
+ * then run initial saga.
+ */
 function createInjectSagasStore(rootSaga, initialReducers, ...args) {
   if (!sagaMiddleware) {
-    throw Error('sagaMiddleware must be set first!');
+    throw Error('sagaMiddleware must be settled first!');
   }
   store = createStore(initialReducers, ...args);
   sagaMiddleware.run(rootSaga);
@@ -58,7 +58,8 @@ function createInjectSagasStore(rootSaga, initialReducers, ...args) {
 }
 
 /**
- * Set sagaMiddleware, before create store.
+ * Export to receive sagaMiddleware.
+ * SagaMiddleware should be settled to run rootSaga in createInjectSagasStore before creating store.
  * @param middleware
  */
 function setSagaMiddleware(middleware) {
@@ -67,7 +68,7 @@ function setSagaMiddleware(middleware) {
 
 export {
   setSagaMiddleware,
-  SagaManager,
+  sagaManager,
 };
 
 export default createInjectSagasStore;

@@ -7,7 +7,7 @@ import { object } from 'prop-types';
 import lodable from 'react-loadable';
 /* Dynamically load reducer. */
 import injectAsyncReducer from './injectAsyncReducer';
-import { SagaManager } from './sagasInjector';
+import { sagaManager } from './sagasInjector';
 
 /* Router with lazy loaded pages. */
 class Router extends React.Component {
@@ -29,7 +29,7 @@ class Router extends React.Component {
           require('./List/reducer').default, // eslint-disable-line global-require
         );
         /* Asynchronously load saga. */
-        SagaManager.startSaga(
+        sagaManager.startSaga(
           /* Saga name. */
           'list',
           /* Saga generator. */
