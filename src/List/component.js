@@ -22,7 +22,29 @@ class List extends React.Component {
     classes: object,
     count: number,
     fetchSomeAsyncRequest: func,
+    onDidMount: func,
+    onWillUnmount: func,
   };
+
+  componentDidMount() {
+    const {
+      onDidMount,
+    } = this.props;
+
+    if (onDidMount) {
+      onDidMount();
+    }
+  }
+
+  componentWillUnmount() {
+    const {
+      onWillUnmount,
+    } = this.props;
+
+    if (onWillUnmount) {
+      onWillUnmount();
+    }
+  }
 
   /* Call saga function to increment count by 1. */
   handleClick = () => {
