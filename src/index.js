@@ -9,8 +9,8 @@ import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import configureStore from './store';
 import App from './app';
-import rootSaga from './saga';
 import createReducer from './reducer';
+import { setSagaMiddleware } from './sagasInjector';
 
 /* Contains HTML5 browser history instance. */
 /* eslint-disable import/prefer-default-export */
@@ -35,9 +35,11 @@ if (process.env.NODE_ENV !== 'production') {
  * Logger must be the last middleware in chain,
  * otherwise it will log thunk and promise, not actual actions.
  */
-const store = configureStore(createReducer(history), compose(applyMiddleware(...middlewares)));
-
-sagaMiddleware.run(rootSaga);
+setSagaMiddleware(sagaMiddleware);
+const store = configureStore(
+  createReducer(history),
+  compose(applyMiddleware(...middlewares)),
+);
 
 ReactDOM.render(
   <Provider store={store}>
