@@ -7,6 +7,7 @@ import { object } from 'prop-types';
 import lodable from 'react-loadable';
 /* Dynamically load reducer. */
 import injectAsyncReducer from './injectAsyncReducer';
+import { SagaManager } from './sagasInjector';
 
 /* Router with lazy loaded pages. */
 class Router extends React.Component {
@@ -19,7 +20,7 @@ class Router extends React.Component {
 
     this.ListPage = lodable({
       loader: () => {
-        /* Aynchronously load reducer. */
+        /* Asynchronously load reducer. */
         injectAsyncReducer(
           context.store,
           /* Reducer name. */
@@ -27,7 +28,13 @@ class Router extends React.Component {
           /* Reducer function. */
           require('./List/reducer').default, // eslint-disable-line global-require
         );
-
+        /* Asynchronously load saga. */
+        SagaManager.startSaga(
+          /* Saga name. */
+          'list',
+          /* Saga generator. */
+          require('./List/saga').default, // eslint-disable-line global-require
+        );
         return import('./List/container');
       },
       loading: () => {
