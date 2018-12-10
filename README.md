@@ -16,3 +16,11 @@ $ yarn start
 - Tree Shaking
 - Code Inspection
 - Code Splitting
+
+## Change log:
+
+###### *Dec 10, 2018*
+
+- Upgrade to Babel 7
+- Use connected-react-router library instead of react-router-redux
+- Async saga
