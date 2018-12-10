@@ -3,7 +3,6 @@ import { take, fork, cancel } from 'redux-saga/effects';
 
 const CANCEL_SAGAS_ACTION = Symbol('CANCEL_SAGAS_HMR');
 let sagaMiddleware;
-
 /* We will use it to dispatch a cancel action */
 let store;
 
@@ -13,7 +12,7 @@ let store;
  * Then listen to cancel action.
  * Corresponding Cancel action is emitted by sagaManager.cancelSaga.
  * @param {string} sagaName
- * @param {function} saga
+ * @param {Function} saga
  */
 function createAbortableSaga(sagaName, saga) {
   return function* main() {
@@ -28,7 +27,6 @@ function createAbortableSaga(sagaName, saga) {
 
 /**
  * Export to run and cancel saga.
- * @type {{startSaga(*=, *=): void, cancelSaga(*=): void}}
  */
 const sagaManager = {
   startSaga(sagaName, saga) {
@@ -60,7 +58,6 @@ function createInjectSagasStore(rootSaga, initialReducers, ...args) {
 /**
  * Export to receive sagaMiddleware.
  * SagaMiddleware should be settled to run rootSaga in createInjectSagasStore before creating store.
- * @param middleware
  */
 function setSagaMiddleware(middleware) {
   sagaMiddleware = middleware;
