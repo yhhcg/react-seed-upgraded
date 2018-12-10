@@ -43,7 +43,7 @@ class Router extends React.Component {
           /* Saga generator. */
           require('./List/saga').default, // eslint-disable-line global-require
         );
-        return import('./List/container');
+        return import('./List');
       },
       loading: () => {
         return <div>Loading...</div>;
