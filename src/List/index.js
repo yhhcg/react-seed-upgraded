@@ -24,15 +24,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(fetchSomeAsyncRequest());
     },
     // onDidMount: () => {
-    //   /* Inject saga when the component is mounted */
-    //   sagaManager.startSaga(
-    //     'List',
-    //     require('./saga').default, /* eslint-disable-line global-require */
-    //   );
+    //   /* Start saga when the component is mounted */
+    //   sagaManager.start('list');
     // },
     // onWillUnmount() {
     //   /* Cancel saga before the component is unmounted and destroyed */
-    //   sagaManager.cancelSaga('List');
+    //   sagaManager.stop('list');
     // },
   };
 };
