@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import {
   Route,
@@ -26,23 +27,20 @@ class Router extends React.Component {
           /* Reducer name. */
           'list',
           /* Reducer function. */
-          require('./List/reducer').default, // eslint-disable-line global-require
+          require('./List/reducer').default,
         );
         /**
-         * Asynchronously load saga.
-         *
+         * Asynchronously load saga, inject list saga.
+         */
+        sagaManager.inject('list', require('./List/saga').default);
+        /**
          * If you take a action on multiple pages, dispatch the action on one of the pages,
          * the saga of other pages will be triggered.
          * In order to avoid that, the sagasInjector expose the sagaManager and you
-         * can use it to inject saga and cancel saga. Refer to List/container how to do it.
+         * can use it to start saga and stop saga. Refer to List/container how to do it.
          * If you control saga yourself, you can remove the following load.
          */
-        sagaManager.startSaga(
-          /* Saga name. */
-          'list',
-          /* Saga generator. */
-          require('./List/saga').default, // eslint-disable-line global-require
-        );
+        sagaManager.start('list');
         return import('./List');
       },
       loading: () => {
