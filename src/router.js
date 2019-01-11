@@ -41,6 +41,24 @@ class Router extends React.Component {
          * If you control saga yourself, you can remove the following load.
          */
         sagaManager.start('list');
+
+        if (module.hot) {
+          module.hot.accept('./List/reducer', () => {
+            injectAsyncReducer(
+              context.store,
+              /* Reducer name. */
+              'list',
+              /* Reducer function. */
+              require('./List/reducer').default,
+            );
+          });
+
+          module.hot.accept('./List/saga', () => {
+            sagaManager.stop('list');
+            sagaManager.inject('list', require('./List/saga').default, true);
+            sagaManager.start('list');
+          });
+        }
         return import('./List');
       },
       loading: () => {
