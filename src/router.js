@@ -16,71 +16,84 @@ class Router extends React.Component {
     store: object,
   };
 
+  pageOptions = {
+    detail: {},
+    list: {
+      reducer: () => require('./List/reducer').default,
+      saga: () => require('./List/saga').default,
+      startSaga: true,
+    },
+  }
+
   constructor(props, context) {
     super(props);
 
-    this.ListPage = lodable({
-      loader: () => {
-        /* Asynchronously load reducer. */
-        injectAsyncReducer(
-          context.store,
-          /* Reducer name. */
-          'list',
-          /* Reducer function. */
-          require('./List/reducer').default,
-        );
-        /**
-         * Asynchronously load saga, inject list saga.
-         */
-        sagaManager.inject('list', require('./List/saga').default);
-        /**
-         * If you take a action on multiple pages, dispatch the action on one of the pages,
-         * the saga of other pages will be triggered.
-         * In order to avoid that, the sagasInjector expose the sagaManager and you
-         * can use it to start saga and stop saga. Refer to List/container how to do it.
-         * If you control saga yourself, you can remove the following load.
-         */
-        sagaManager.start('list');
+    this.createPageComponents(context);
+  }
 
-        if (module.hot) {
-          module.hot.accept('./List/reducer', () => {
+  createPageComponents(context) {
+    Object.entries(this.pageOptions).forEach(([pageName, option]) => {
+      const pageNameFirstLetterUpper = pageName.replace(
+        pageName.slice(0, 1),
+        pageName.slice(0, 1).toLocaleUpperCase(),
+      );
+
+      this[`${pageNameFirstLetterUpper}`] = lodable({
+        loader: () => {
+          if (option.reducer) {
+            /* Asynchronously load reducer. */
             injectAsyncReducer(
               context.store,
               /* Reducer name. */
-              'list',
+              pageName,
               /* Reducer function. */
-              require('./List/reducer').default,
+              option.reducer(),
             );
-          });
 
-          module.hot.accept('./List/saga', () => {
-            sagaManager.stop('list');
-            sagaManager.inject('list', require('./List/saga').default, true);
-            sagaManager.start('list');
-          });
-        }
-        return import('./List');
-      },
-      loading: () => {
-        return <div>Loading...</div>;
-      },
-    });
+            if (module.hot) {
+              module.hot.accept(require.resolve(`./${pageNameFirstLetterUpper}/reducer`), () => {
+                injectAsyncReducer(context.store, pageName, option.reducer());
+              });
+            }
+          }
 
-    this.DetailPage = lodable({
-      loader: () => {
-        return import('./Detail');
-      },
-      loading: () => {
-        return <div>Loading...</div>;
-      },
+          if (option.saga) {
+            /**
+             * Asynchronously load saga, inject saga.
+             */
+            sagaManager.inject(pageName, option.saga());
+            /**
+             * If you take a action on multiple pages, dispatch the action on one of the pages,
+             * the saga of other pages will be triggered.
+             * In order to avoid that, the sagasInjector expose the sagaManager and you
+             * can use it to start saga and stop saga. Refer to List/container how to do it.
+             * If you control saga yourself, you can remove the following load.
+             */
+            option.startSaga  && sagaManager.start(pageName);
+  
+            if (module.hot) {
+              module.hot.accept(require.resolve(`./${pageNameFirstLetterUpper}/saga`), () => {
+                sagaManager.stop(pageName);
+                sagaManager.inject(pageName, option.saga(), true);
+                sagaManager.start(pageName);
+              });
+            }
+          }
+
+          return import(`./${pageNameFirstLetterUpper}`);
+        },
+        loading: () => {
+          return <div>Loading...</div>;
+        },
+      });
     });
   }
 
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={this.ListPage} />
-        <Route exact path="/detail" component={this.DetailPage} />
+        <Route exact path="/" component={this.List} />
+        <Route exact path="/detail" component={this.Detail} />
       </Switch>
     );
   }
