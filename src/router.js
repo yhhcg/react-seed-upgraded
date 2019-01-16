@@ -82,7 +82,11 @@ class Router extends React.Component {
 
           return import(`./${pageNameFirstLetterUpper}`);
         },
-        loading: () => {
+        loading: (prop) => {
+          /* If there throws error out of react component, we can only receive here */
+          if (prop.error) {
+            throw prop.error;
+          }
           return <div>Loading...</div>;
         },
       });
