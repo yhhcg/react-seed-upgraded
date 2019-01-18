@@ -24,3 +24,7 @@ $ yarn start
 - Upgrade to Babel 7
 - Use connected-react-router library instead of react-router-redux
 - Async saga
+
+###### *Jan 18, 2019*
+
+- Reducer and saga HMR
