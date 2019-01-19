@@ -46,9 +46,9 @@ function createAbortableSaga(sagaName, saga) {
 }
 
 /**
- * When load a async saga file, we need inject it first,
- * then it loaded, after then, we can run or stop it.
- * If the saga with the key already exists, do nothing, or force to update.
+ * When load a async saga file, we need inject it first.
+ * After loaded, we can run or stop it.
+ * If the saga with the key already exists, do nothing or force update.
  */
 function injectSaga(sagaName, saga, force = false) {
   const savedSaga = store.injectedSagas[sagaName];
@@ -58,7 +58,7 @@ function injectSaga(sagaName, saga, force = false) {
 }
 
 /**
- * Cancel a injected saga according to saga name.
+ * Abort a injected saga according to saga name.
  * @param {string} sagaName
  */
 function stopSaga(sagaName) {
