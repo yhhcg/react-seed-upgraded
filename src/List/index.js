@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-// import { sagaManager } from '../sagasInjector';
+// import sagaManager from '../sagaManager';
 import Component from './component';
 import {
   async,

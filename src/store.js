@@ -2,9 +2,7 @@
  * This module composes redux store instance.
  * Redux store manages many complex states for the app.
  */
-import rootSage from './saga';
-import createInjectSagasStore from './sagasInjector';
-
+import { createStore } from 'redux';
 
 /**
  * Factory composing react store with reducers and middlewares.
@@ -12,14 +10,13 @@ import createInjectSagasStore from './sagasInjector';
  * @param  {Object} initialState - An instance by calling applyMiddleware.
  */
 export default function configureStore(rootReducer, initialState) {
-  const store = createInjectSagasStore(rootSage, rootReducer, initialState);
+  const store = createStore(rootReducer, initialState);
 
-  // Enable Webpack hot module replacement for reducers
-  // if (module.hot) {
-  //   module.hot.accept('./reducer', () => {
-  //     store.replaceReducer(createReducer(store.asyncReducers));
-  //   });
-  // }
+  /**
+   * Extensions.
+   * Saga registry, adding an extra attribute to the store object.
+   */
+  store.injectedSagas = {};
 
   /**
    * Extensions.

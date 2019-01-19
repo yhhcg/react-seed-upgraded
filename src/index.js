@@ -10,7 +10,8 @@ import logger from 'redux-logger';
 import configureStore from './store';
 import App from './app';
 import createReducer from './reducer';
-import { setSagaMiddleware } from './sagasInjector';
+import rootSaga from './saga';
+import { setSagaMiddleware, setStore } from './sagaManager';
 
 /* Contains HTML5 browser history instance. */
 /* eslint-disable import/prefer-default-export */
@@ -30,16 +31,23 @@ let middlewares = [historyMiddleware, sagaMiddleware];
 if (process.env.NODE_ENV !== 'production') {
   middlewares = [...middlewares, logger];
 }
+
 /**
  * Represents the integration of redux store and react router.
  * Logger must be the last middleware in chain,
  * otherwise it will log thunk and promise, not actual actions.
  */
-setSagaMiddleware(sagaMiddleware);
 const store = configureStore(
   createReducer(history),
   compose(applyMiddleware(...middlewares)),
 );
+setStore(store);
+setSagaMiddleware(sagaMiddleware);
+
+/**
+ * Dynamically run root saga.
+ */
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

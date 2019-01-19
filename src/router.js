@@ -8,7 +8,7 @@ import { object } from 'prop-types';
 import lodable from 'react-loadable';
 /* Dynamically load reducer. */
 import injectAsyncReducer from './injectAsyncReducer';
-import { sagaManager } from './sagasInjector';
+import sagaManager from './sagaManager';
 
 /* Router with lazy loaded pages. */
 class Router extends React.Component {
