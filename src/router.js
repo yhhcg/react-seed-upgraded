@@ -5,22 +5,102 @@ import {
   Switch,
 } from 'react-router-dom';
 import { object } from 'prop-types';
-import lodable from 'react-loadable';
+import loadable from 'react-loadable';
 /* Dynamically load reducer. */
 import injectAsyncReducer from './injectAsyncReducer';
 import sagaManager from './sagaManager';
 
 /* Router with lazy loaded pages. */
 class Router extends React.Component {
+  static createLoadableComponent(context, routeName, routeOption) {
+    const {
+      component,
+      reducer,
+      reducerPath,
+      saga,
+      sagaPath,
+      startSaga,
+    } = routeOption;
+    const reducerName = routeName;
+    const sagaName = routeName;
+
+    const loadReducer = () => {
+      /* Asynchronously load reducer. */
+      injectAsyncReducer(context.store, reducerName, reducer());
+
+      if (module.hot) {
+        module.hot.accept(reducerPath, () => {
+          injectAsyncReducer(context.store, reducerName, reducer());
+        });
+      }
+    };
+
+    const loadSaga = () => {
+      /**
+       * Asynchronously load saga, inject saga.
+       */
+      sagaManager.inject(sagaName, saga());
+      /**
+       * If you take a action on multiple pages, dispatch the action on one of the pages,
+       * the saga of other pages will be triggered.
+       * In order to avoid that, the sagasInjector expose the sagaManager and you
+       * can use it to start saga and stop saga. Refer to List/container how to do it.
+       * If you control saga yourself, you can remove the following load.
+       */
+      if (startSaga) sagaManager.start(sagaName);
+
+      if (module.hot) {
+        module.hot.accept(sagaPath, () => {
+          sagaManager.stop(sagaName);
+          sagaManager.inject(sagaName, saga(), true);
+          sagaManager.start(sagaName);
+        });
+      }
+    };
+
+    const loadableComponent = loadable({
+      loader: () => {
+        if (routeOption.reducer) { loadReducer(); }
+        if (routeOption.saga) { loadSaga(); }
+
+        return component();
+      },
+      loading: (prop) => {
+        /* If there throws error out of react component, we can only receive here */
+        if (prop.error) {
+          throw prop.error;
+        }
+        return <div>Loading...</div>;
+      },
+    });
+
+    return loadableComponent;
+  }
+
+  static createLoadables(context, routeNames, routeOptions) {
+    const loadables = {};
+
+    routeNames.forEach((routeName) => {
+      loadables[routeName] = Router.createLoadableComponent(context, routeName, routeOptions[routeName]);
+    });
+
+    return loadables;
+  }
+
   static contextTypes = {
     store: object,
   };
 
-  pageOptions = {
-    detail: {},
+  routeOptions = {
+    detail: {
+      component: () => import('./Detail'),
+    },
     list: {
+      component: () => import('./List'),
       reducer: () => require('./List/reducer').default,
+      reducerPath: './List/reducer',
       saga: () => require('./List/saga').default,
+      sagaPath: './List/saga',
       startSaga: true,
     },
   }
@@ -28,76 +108,15 @@ class Router extends React.Component {
   constructor(props, context) {
     super(props);
 
-    this.createPageComponents(context);
-  }
-
-  createPageComponents(context) {
-    Object.entries(this.pageOptions).forEach(([pageName, option]) => {
-      const pageNameFirstLetterUpper = pageName.replace(
-        pageName.slice(0, 1),
-        pageName.slice(0, 1).toLocaleUpperCase(),
-      );
-
-      this[`${pageNameFirstLetterUpper}`] = lodable({
-        loader: () => {
-          if (option.reducer) {
-            /* Asynchronously load reducer. */
-            injectAsyncReducer(
-              context.store,
-              /* Reducer name. */
-              pageName,
-              /* Reducer function. */
-              option.reducer(),
-            );
-
-            if (module.hot) {
-              module.hot.accept(require.resolve(`./${pageNameFirstLetterUpper}/reducer`), () => {
-                injectAsyncReducer(context.store, pageName, option.reducer());
-              });
-            }
-          }
-
-          if (option.saga) {
-            /**
-             * Asynchronously load saga, inject saga.
-             */
-            sagaManager.inject(pageName, option.saga());
-            /**
-             * If you take a action on multiple pages, dispatch the action on one of the pages,
-             * the saga of other pages will be triggered.
-             * In order to avoid that, the sagasInjector expose the sagaManager and you
-             * can use it to start saga and stop saga. Refer to List/container how to do it.
-             * If you control saga yourself, you can remove the following load.
-             */
-            option.startSaga  && sagaManager.start(pageName);
-  
-            if (module.hot) {
-              module.hot.accept(require.resolve(`./${pageNameFirstLetterUpper}/saga`), () => {
-                sagaManager.stop(pageName);
-                sagaManager.inject(pageName, option.saga(), true);
-                sagaManager.start(pageName);
-              });
-            }
-          }
-
-          return import(`./${pageNameFirstLetterUpper}`);
-        },
-        loading: (prop) => {
-          /* If there throws error out of react component, we can only receive here */
-          if (prop.error) {
-            throw prop.error;
-          }
-          return <div>Loading...</div>;
-        },
-      });
-    });
+    const routeNames = Object.keys(this.routeOptions);
+    this.loadables = Router.createLoadables(context, routeNames, this.routeOptions);
   }
 
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={this.List} />
-        <Route exact path="/detail" component={this.Detail} />
+        <Route exact path="/" component={this.loadables.list} />
+        <Route exact path="/detail" component={this.loadables.detail} />
       </Switch>
     );
   }
