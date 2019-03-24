@@ -93,14 +93,19 @@ class Router extends React.Component {
 
   routeOptions = {
     detail: {
+      /* Page component. */
       component: () => import('./Detail'),
     },
     list: {
+      /* Page component. */
       component: () => import('./List'),
+      /* Dynamic require reducer for updating reducer once hot. */
       reducer: () => require('./List/reducer').default,
       reducerPath: './List/reducer',
+      /* Dynamic require saga for updating saga once hot. */
       saga: () => require('./List/saga').default,
       sagaPath: './List/saga',
+      /* Whether to start saga. */
       startSaga: true,
     },
   }
