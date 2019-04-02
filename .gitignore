@@ -60,8 +60,5 @@ typings/
 # Release folder
 dist/
 
-# jsDoc path
-out
-
 # IntelliJ config files
 .idea
